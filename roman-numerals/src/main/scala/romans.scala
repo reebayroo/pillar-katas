@@ -4,7 +4,6 @@ package romans
 class RomanConverter {
 	def toInt(s: String):Int =  {
 		convertToInt(s, 0) 
-	
 	}
 	def convertToInt(s:String, sum:Int ): Int = s match {
 			case "" => sum
@@ -17,7 +16,8 @@ class RomanConverter {
 				convertToInt(s.tail, if (curr < next) sum - curr else sum + curr)
 			}
 		}
-	
+	def toRoman(i:Int)=""
+
 	def convertToken(s:Char): Int = 
 		s match {
 			case 'I' => 1

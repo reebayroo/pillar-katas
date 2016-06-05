@@ -3,7 +3,7 @@ import romans._;
 class RomansSpec extends FlatSpec with Matchers {
       // Your tests here
       val converter = new RomanConverter()
-      behavior of "A Roman Converter "
+      behavior of "A Roman Number to Integer converter  "
 	  it should "return 0 for empty string " in  { converter.toInt("") should be (0)}
       it should "change I to 1 "      in { converter.toInt("I") should be (1) }
 	  it should "change 'V' to  5"     in { converter.toInt("V")    should be (5)} 
@@ -29,5 +29,8 @@ class RomansSpec extends FlatSpec with Matchers {
 	  it should "change 'XCIX' to 99" in { converter.toInt("XCIX")   should be (99)}
 	  it should "change 'CMXCIX' to 999" in { converter.toInt("CMXCIX")   should be (999)}
 	  it should "change 'MMMMCMXCIX' to 4999" in { converter.toInt("MMMMCMXCIX")   should be (4999)}
+	  
+      behavior of "A Integer to Roman Number converter  "
+	  it should "return  empty string for 0" in { converter.toRoman(0) should be ("")}
 
 }
