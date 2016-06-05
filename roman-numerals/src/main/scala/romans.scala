@@ -16,9 +16,7 @@ class RomanConverter {
 
 				val curr = convertToken(s.head)
 				val next = convertToken(s.tail.head)
-				println(curr, next)
-				println(curr == 1 && next == 5)
-				if (curr == 1 && next == 5) 
+				if (curr < next) 
 					convertToInt(s.tail, sum - curr)
 				else 
 					convertToInt(s.tail, sum + curr)
