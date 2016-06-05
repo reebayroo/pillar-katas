@@ -66,5 +66,6 @@ class RomansSpec extends FlatSpec with Matchers {
 	it should "return 'VIII' for 8" in { converter.toRoman(8) should be ("VIII")}
 	it should "return 'IV' for 4" in { converter.toRoman(4) should be ("IV")}
 	it should "return 'IX' for 9" in { converter.toRoman(9) should be ("IX")}
+	it should "return 'XIV' for 14" in { converter.toRoman(14) should be ("XIV")}
 
 }
