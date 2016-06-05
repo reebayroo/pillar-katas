@@ -16,7 +16,11 @@ class RomanConverter {
 				convertToInt(s.tail, if (curr < next) sum - curr else sum + curr)
 			}
 		}
-	def toRoman(i:Int)=""
+	def toRoman(i:Int)={ 
+		if (i < 1 || i > 4999) 
+			throw new IllegalArgumentException("Invalid Range")
+		"I"
+	}
 
 	def convertToken(s:Char): Int = 
 		s match {
