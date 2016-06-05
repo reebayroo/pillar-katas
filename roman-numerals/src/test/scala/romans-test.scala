@@ -82,5 +82,4 @@ class RomansSpec extends FlatSpec with Matchers {
 	it should "return 'MMMMDCCCXXIII' for 4823" in { converter.toRoman(4823) should be ("MMMMDCCCXXIII")}
 	it should "return 'MMMMCMXCIX' for 4999" in { converter.toRoman(4999) should be ("MMMMCMXCIX")}
  
-
 }
