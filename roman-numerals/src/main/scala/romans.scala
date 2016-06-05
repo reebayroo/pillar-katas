@@ -3,9 +3,28 @@ package romans
 
 class RomanConverter {
 	def toInt(s: String):Int =  {
+		convertToInt(s, 0) 
+	
+	}
+	def convertToInt(s:String, sum:Int ): Int = {
 		s match {
-			case "" => 0
-			case _ => convertToken(s.head) + toInt(s.tail)
+			case "" => sum
+			case _ => {
+				if (s.tail.isEmpty()){
+					return sum + convertToken(s.head)
+				}
+
+				val curr = convertToken(s.head)
+				val next = convertToken(s.tail.head)
+				println(curr, next)
+				println(curr == 1 && next == 5)
+				if (curr == 1 && next == 5) 
+					convertToInt(s.tail, sum - curr)
+				else 
+					convertToInt(s.tail, sum + curr)
+
+			}
+			case l => sum + convertToken(l.head)
 		}
 	}
 	def convertToken(s:Char): Int = 
