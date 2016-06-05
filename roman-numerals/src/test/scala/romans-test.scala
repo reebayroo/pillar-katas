@@ -12,4 +12,5 @@ class RomansSpec extends FlatSpec with Matchers {
 	  "" should "change 'C' to  100 " in  { converter.toInt("C") should be (100)}
 	  "" should "change 'D' to  500 " in  { converter.toInt("D") should be (500)}
 	  "" should "change 'M' to  1000 " in  { converter.toInt("M") should be (1000)}
+	  "" should "return  0 for '' " in  { converter.toInt("") should be (0)}
 }
