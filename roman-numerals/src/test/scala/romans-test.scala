@@ -76,5 +76,11 @@ class RomansSpec extends FlatSpec with Matchers {
 	it should "return 'XLV' for 45" in { converter.toRoman(45) should be ("XLV")}
 	it should "return 'XLIX' for 49" in { converter.toRoman(49) should be ("XLIX")}
 	it should "return 'XCIX' for 99" in { converter.toRoman(99) should be ("XCIX")}
+	it should "return 'MMDXCIX' for 2599" in { converter.toRoman(2599) should be ("MMDXCIX")}
+	it should "return 'MMMM' for 4000" in { converter.toRoman(4000) should be ("MMMM")}
+	it should "return 'MCMXCIX' for 1999" in { converter.toRoman(1999) should be ("MCMXCIX")}
+	it should "return 'MMMMDCCCXXIII' for 4823" in { converter.toRoman(4823) should be ("MMMMDCCCXXIII")}
+	it should "return 'MMMMCMXCIX' for 4999" in { converter.toRoman(4999) should be ("MMMMCMXCIX")}
+ 
 
 }

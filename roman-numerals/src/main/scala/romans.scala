@@ -40,11 +40,14 @@ class RomanConverter {
 	}
 	def convertToRoman(decimal:Int, unit: Int, l:List[String], sum: Int ): String = {
 		val digit = sum - ((sum / 10) * 10)
-		val fives  = unit * 5
+		val five  = decimal / 2
+		println(decimal, five, unit, sum, l)
+
 		if (sum == 0) return l.mkString
 		if (digit == 9) return convertToRoman(decimal * 10, decimal, intToRomanMap(unit) :: intToRomanMap(decimal) :: l, (sum - 9) / 10)
-		if (digit == 5) return convertToRoman(decimal * 10, decimal, intToRomanMap((fives)) :: l, (sum - 5) / 10)
-		if (digit == 4) return convertToRoman(decimal * 10, decimal, intToRomanMap(unit) :: intToRomanMap((fives)) :: l , (sum - 4) / 10)
+		if (digit == 5) return convertToRoman(decimal * 10, decimal, intToRomanMap((five)) :: l, (sum - 5) / 10)
+		if (digit == 4 && unit != 1000) return convertToRoman(decimal * 10, decimal, intToRomanMap(unit) :: intToRomanMap((five)) :: l , (sum - 4) / 10)
+		if (digit == 4 && unit == 1000) return convertToRoman(decimal, unit, intToRomanMap(unit) :: l, sum - 1)
 		if (digit > 0) return convertToRoman(decimal, unit, intToRomanMap(unit) :: l, sum - 1)
 		return convertToRoman(decimal * 10, decimal, l, (sum/10))
 
