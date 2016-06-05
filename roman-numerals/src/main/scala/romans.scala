@@ -28,11 +28,16 @@ class RomanConverter {
 			}
 		}
 	def toRoman(i:Int)={ 
-		if (i < 1 || i > 4999) 
+		if (i > 0 && i < 5000) 
+			intToRomanMap(i)
+		else 
 			throw new IllegalArgumentException("Invalid Range")
-		intToRomanMap(i)
 	}
 
-	def convertToken(s:Char): Int = romanToIntMap(s)
+	def convertToken(s:Char): Int = 
+		if (romanToIntMap.contains(s)) 
+			romanToIntMap(s)
+		else
+			throw new IllegalArgumentException("Invalid roman numeral " + s)
 
 }

@@ -29,6 +29,11 @@ class RomansSpec extends FlatSpec with Matchers {
 	it should "be 99 for 'XCIX'" in { converter.toInt("XCIX")   should be (99)}
 	it should "be 999 for 'CMXCIX'" in { converter.toInt("CMXCIX")   should be (999)}
 	it should "be 4999 for 'MMMMCMXCIX'" in { converter.toInt("MMMMCMXCIX")   should be (4999)}
+	it should "throw IllegalArgumentException if given invalid Roman Numeral " in {
+		intercept[IllegalArgumentException] {
+			converter.toInt("W")
+		}
+	}
 
 	behavior of "A Integer to Roman Number converter  "
 	it should "throw IllegalArgumentException if given zero " in {
