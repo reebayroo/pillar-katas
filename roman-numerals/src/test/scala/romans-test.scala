@@ -67,5 +67,12 @@ class RomansSpec extends FlatSpec with Matchers {
 	it should "return 'IV' for 4" in { converter.toRoman(4) should be ("IV")}
 	it should "return 'IX' for 9" in { converter.toRoman(9) should be ("IX")}
 	it should "return 'XIV' for 14" in { converter.toRoman(14) should be ("XIV")}
+	it should "return 'XIX' for 19" in { converter.toRoman(19) should be ("XIX")}
+	it should "return 'XX' for 20" in { converter.toRoman(20) should be ("XX")}
+	it should "return 'XL' for 40" in { converter.toRoman(40) should be ("XL")}
+	it should "return 'XXXIX' for 39" in { converter.toRoman(39) should be ("XXXIX")}
+	it should "return 'XLV' for 45" in { converter.toRoman(45) should be ("XLV")}
+	it should "return 'XLIX' for 49" in { converter.toRoman(49) should be ("XLIX")}
+	it should "return 'XCIX' for 99" in { converter.toRoman(99) should be ("XCIX")}
 
 }

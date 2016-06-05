@@ -43,11 +43,13 @@ class RomanConverter {
 		if (fits(1000)) return convertToRoman(intToRomanMap(1000) :: l, sum - 1000) 
 		if (fits(500)) return convertToRoman(intToRomanMap(500) :: l, sum - 500)
 		if (fits(100)) return convertToRoman(intToRomanMap(100) :: l, sum - 100)
-		if (fits(50)) return convertToRoman(intToRomanMap(50) :: l, sum - 50)
+		if (fits(99)) return convertToRoman(intToRomanMap(100) :: intToRomanMap(10)  :: l, sum - 90)
 		
+		if (fits(50)) return convertToRoman(intToRomanMap(50) :: l, sum - 50)
+		if (fits(40)) return convertToRoman(intToRomanMap(50) :: intToRomanMap(10)  :: l, sum - 40)
 		if (fits(10)) return convertToRoman(intToRomanMap(10) :: l, sum - 10)
-		if (fits(9)) return convertToRoman(intToRomanMap(10) :: intToRomanMap(1) :: l, sum - 9)
 
+		if (fits(9)) return convertToRoman(intToRomanMap(10) :: intToRomanMap(1) :: l, sum - 9)
 		if (fits(5)) return convertToRoman(intToRomanMap(5) :: l, sum - 5)
 		if (fits(4)) return convertToRoman(intToRomanMap(5) :: intToRomanMap(1) :: l, sum - 4)
 		return convertToRoman(intToRomanMap(1) :: l, sum-1)
