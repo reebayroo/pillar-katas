@@ -14,5 +14,8 @@ class RomansSpec extends FlatSpec with Matchers {
 	  "" should "change 'D' to  500 "  in { converter.toInt("D") should be (500)}
 	  "" should "change 'M' to  1000 " in { converter.toInt("M") should be (1000)}
 	  "" should "change 'II' to 2"     in { converter.toInt("II") should be (2)}
+	  "" should "change 'III' to 3"     in { converter.toInt("III") should be (3)}
+	  "" should "change 'XXX' to 30"     in { converter.toInt("XXX") should be (30)}
+	  "" should "change 'CCC' to 300"     in { converter.toInt("CCC") should be (300)}
 
 }
