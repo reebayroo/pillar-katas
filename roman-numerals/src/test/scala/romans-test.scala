@@ -47,6 +47,12 @@ class RomansSpec extends FlatSpec with Matchers {
 			converter.toRoman(5000 + r.nextInt(1000))
 		}
 	}
-	it should "be 'I' for 1" in { converter.toRoman(1)   should be ("I")}
+	it should "be 'I' for 1" in { converter.toRoman(1) should be ("I")}
+	it should "be 'V' for 5" in { converter.toRoman(5) should be ("V")}
+	it should "be 'X' for 10" in { converter.toRoman(10) should be ("X")}
+	it should "be 'L' for 50" in { converter.toRoman(50) should be ("L")}
+	it should "be 'C' for 100" in { converter.toRoman(100) should be ("C")}
+	it should "be 'D' for 500" in { converter.toRoman(500) should be ("D")}
+	it should "be 'M' for 1000" in { converter.toRoman(1000) should be ("M")}
 
 }
