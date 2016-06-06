@@ -18,4 +18,17 @@ class RedPencilSpec extends FlatSpec with Matchers {
 		val expected = RedPencilPromotion(false)
 		service.evaluate(new Product(3.00)) should be (expected)
 	}
+	it should "not start when price drop is less than 5%" in {
+		val expected = RedPencilPromotion(false)
+		service.evaluate(new Product(98.00, List(new PriceHistory(100.00)))) should be (expected)
+	}
+	it should "starts when there is a price drop of 5%" in {
+		val expected = RedPencilPromotion(true)
+		service.evaluate(new Product(95.00, List(new PriceHistory(100.00)))) should be (expected)
+	}
+	it should "starts when there is a price drop of more 5%" in {
+		val expected = RedPencilPromotion(true)
+		service.evaluate(new Product(94.00, List(new PriceHistory(100.00)))) should be (expected)
+	}
+
 }
