@@ -9,5 +9,10 @@ class RedPencilSpec extends FlatSpec with Matchers {
 			service.evaluate(null)
 		}
 	}
- 
+	it should "expect a product with a price" in {
+		intercept[IllegalArgumentException] {
+			service.evaluate(new Product())
+		}
+	} 
+	
 }
