@@ -14,5 +14,8 @@ class RedPencilSpec extends FlatSpec with Matchers {
 			service.evaluate(new Product())
 		}
 	} 
-	
+	it should "not start when there are no price changes " in {
+		val expected = RedPencilPromotion(false)
+		service.evaluate(new Product(3.00)) should be (expected)
+	}
 }
