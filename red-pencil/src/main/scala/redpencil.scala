@@ -4,8 +4,11 @@ class RedPencilService {
 	def evaluate(p:Product):RedPencilPromotion={
 		if (p == null) throw new IllegalArgumentException("Product Required")
 		if (p.price == 0.00) throw new IllegalArgumentException("Price Required")
-		var history = p.priceHistory.find(_!=null)
-		if (history.isDefined && ( history.get.price * 0.95 >= p.price)) return RedPencilPromotion(true)
+
+		def priceChanged(price:Double) = p.price <= price * 0.95 && p.price >= price * 0.70
+		 
+		var lastChange = p.priceHistory.find(_!=null)
+		if (lastChange.isDefined && priceChanged(lastChange.get.price) ) return RedPencilPromotion(true)
 		return RedPencilPromotion(false)
 	}
 }
