@@ -6,4 +6,5 @@ scala:
 before_script:
   - cd roman-numerals
 
-script: sbt test
+script: sbt coverage test
+after_success: sbt coverageReport
