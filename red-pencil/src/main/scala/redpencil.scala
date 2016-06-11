@@ -1,4 +1,5 @@
 package redpencil
+import com.github.nscala_time.time.Imports._;
 
 class RedPencilService {
 	def evaluate(p:Product):RedPencilPromotion={
@@ -15,4 +16,4 @@ class RedPencilService {
 
 class Product (val price:Double=0.00, val priceHistory:List[PriceHistory]=List())
 class PriceHistory(val price:Double=0.00)
-case class RedPencilPromotion(val active:Boolean)
+case class RedPencilPromotion(val active:Boolean, val expiration:LocalDate=LocalDate.now + 30.days)

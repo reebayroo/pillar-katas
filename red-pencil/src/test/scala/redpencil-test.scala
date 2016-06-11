@@ -1,5 +1,6 @@
 import org.scalatest._
 import redpencil._;
+import com.github.nscala_time.time.Imports._;
 class RedPencilSpec extends FlatSpec with Matchers {
       // Your tests here
 	val service = new RedPencilService()
@@ -34,5 +35,10 @@ class RedPencilSpec extends FlatSpec with Matchers {
 		val expected = RedPencilPromotion(false)
 		service.evaluate(new Product(69.00, List(new PriceHistory(100.00)))) should be (expected)
 	}
+	it should "have a expiration date" in {
+		val expected = RedPencilPromotion(true, LocalDate.now + 30.days)
+		service.evaluate(new Product(80.00, List(new PriceHistory(100.00)))) should be (expected)
+	}
+
 
 }
