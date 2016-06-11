@@ -4,16 +4,20 @@ import com.github.nscala_time.time.Imports._;
 class RedPencilService {
 	def evaluate(p:Product):RedPencilPromotion={
 		if (p == null) throw new IllegalArgumentException("Product Required")
-		if (p.price == 0.00) throw new IllegalArgumentException("Price Required")
+		if (p.prices == Nil) throw new IllegalArgumentException("Price Required")
 
-		def priceChanged(price:Double) = p.price <= price * 0.95 && p.price >= price * 0.70
-		 
-		var lastChange = p.priceHistory.find(_!=null)
-		if (lastChange.isDefined && priceChanged(lastChange.get.price) ) return RedPencilPromotion(true)
-		return RedPencilPromotion(false)
+		def priceChanged(currentPrice:Double, previousPrice:Double) = currentPrice <= previousPrice * 0.95 && currentPrice >= previousPrice * 0.70
+		def comparePrices(price:Price, previousPrice:Price):Boolean = priceChanged(price.price, previousPrice.price) 
+
+		return p.prices.tail.headOption match {
+			case Some(lastChanged) => RedPencilPromotion(comparePrices(p.prices.head, lastChanged))
+			case None => RedPencilPromotion(false)
+		}
+		
+
 	}
 }
 
-class Product (val price:Double=0.00, val priceHistory:List[PriceHistory]=List())
-class PriceHistory(val price:Double=0.00)
+case class Product (val prices:Price*)
+case class Price(val price:Double=0.00, val start:LocalDate=LocalDate.now())
 case class RedPencilPromotion(val active:Boolean, val expiration:LocalDate=LocalDate.now + 30.days)
