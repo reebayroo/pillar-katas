@@ -3,7 +3,7 @@ import com.github.nscala_time.time.Imports._
 
 
 class RedPencilService {
-	def evaluate(p:Product):RedPencilPromotion={
+	def evaluate(p:Product):Option[RedPencilPromotion]={
 		if (p == null) throw new IllegalArgumentException("Product Required")
 		if (p.prices == Nil) throw new IllegalArgumentException("Price Required")
 
@@ -25,10 +25,9 @@ class RedPencilService {
 		return prices.tail.headOption match {
 			case Some(previousPriceChange) if (
 				comparePrices(prices.head, previousPriceChange) &&
-				wasStableForLast30Days(prices.head, previousPriceChange) ) => RedPencilPromotion(
-				true,
-				expiration=lastDate(prices.head) )
-			case _ => null
+				wasStableForLast30Days(prices.head, previousPriceChange) ) => Some( RedPencilPromotion(
+				lastDate(prices.head) ) )
+			case _ => None
 		}
 		
 
@@ -37,4 +36,4 @@ class RedPencilService {
 
 case class Product (val prices:Price*)
 case class Price(val price:Double=0.00, val start:LocalDate=LocalDate.now())
-case class RedPencilPromotion(val active:Boolean, val expiration:LocalDate=LocalDate.now + 30.days)
+case class RedPencilPromotion(val expiration:LocalDate=LocalDate.now + 30.days)
