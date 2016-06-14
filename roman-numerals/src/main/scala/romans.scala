@@ -14,17 +14,15 @@ class RomanConverter {
 	private val intRomanMap = romanIntMap.map { case (k, v) => (v , k.toString) }
 
 	def toInt(s: String):Int =  {
-		convertToInt(s, 0) 
+		convertToInt(s.toList, 0) 
 	}
-	private def convertToInt(s:String, sum:Int ): Int = s match {
-			case "" => sum
-			case _ => {
-				if (s.tail.isEmpty()){
-					return sum + convertToken(s.head)
-				}
-				val curr = convertToken(s.head)
-				val next = convertToken(s.tail.head)
-				convertToInt(s.tail, if (curr < next) sum - curr else sum + curr)
+	private def convertToInt(s:List[Char], sum:Int ): Int = s match {
+			case Nil => sum
+			case head :: Nil => return sum + convertToken(head)
+			case head::tail => { 
+				val curr = convertToken(head)
+				val next = convertToken(tail.head)
+				convertToInt(tail, if (curr < next) sum - curr else sum + curr)
 			}
 		}
 	def toRoman(i:Int)={
@@ -37,15 +35,18 @@ class RomanConverter {
 		}
 	}
 	private def convertToRoman(decimal:Int, unit: Int, l:List[String], sum: Int ): String = {
-		def minusAndShift(num:Int)=(sum-num)/10
+		def subtractAndShift(num:Int)=(sum-num)/10
 		val digit = sum - ((sum / 10) * 10)
 		val five  = decimal / 2
 		if (sum == 0) l.mkString
-		else if (digit == 9) convertToRoman(decimal * 10, decimal, intRomanMap(unit) :: intRomanMap(decimal) :: l, minusAndShift(9))
-		else if (digit == 5) convertToRoman(decimal * 10, decimal, intRomanMap(five) :: l, minusAndShift(5))
-		else if (digit == 4 && unit != 1000) convertToRoman(decimal * 10, decimal, intRomanMap(unit) :: intRomanMap((five)) :: l , minusAndShift(4))
-		else if ((digit == 4 && unit == 1000) || (digit > 0)) convertToRoman(decimal, unit, intRomanMap(unit) :: l, sum - 1)
-		else convertToRoman(decimal * 10, decimal, l, minusAndShift(0))
+		else digit match {
+			case 9 => convertToRoman(decimal * 10, decimal, intRomanMap(unit) :: intRomanMap(decimal) :: l, subtractAndShift(9))
+			case 5 => convertToRoman(decimal * 10, decimal, intRomanMap(five) :: l, subtractAndShift(5))
+			case 4 if unit != 1000 => convertToRoman(decimal * 10, decimal, intRomanMap(unit) :: intRomanMap((five)) :: l , subtractAndShift(4))
+			case 4 if unit == 1000 => convertToRoman(decimal, unit, intRomanMap(unit) :: l, sum - 1)
+			case d if d > 0 => convertToRoman(decimal, unit, intRomanMap(unit) :: l, sum - 1)
+			case _ => convertToRoman(decimal * 10, decimal, l, subtractAndShift(0))
+		}
 	}
 
 	private def convertToken(s:Char): Int = { 
